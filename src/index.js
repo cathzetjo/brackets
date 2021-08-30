@@ -1,20 +1,14 @@
 module.exports = function check(str, bracketsConfig) {
-
-  if (str.length % 2 != 0) {
-    return false;
-  }
-
-  let checkString="";
-
-  for (let i = 0; i < bracketsConfig.length; i++) {
-
-    if (str.includes(bracketsConfig[i])) {
-
-      checkString = str.replace(bracketsConfig[i], '');
+  let array = [];
+  let strLength = str.length;
+  for (let i = 0; i < strLength; i++) {
+    let arrayLength = array.length;
+    const check = bracketsConfig.find(bracketsConfig => bracketsConfig.includes(str[i]));
+    if(check[0] === array[arrayLength - 1] && check[1]=== str[i]) {
+      array.pop();
+    } else {
+      array.push(str[i]);
     }
-    
   }
-
-return (checkString.length == 0) ? true : false;
-  
-}
+  return (array.length === 0);
+};
